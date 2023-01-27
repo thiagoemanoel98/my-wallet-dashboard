@@ -1,8 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
-    grid-area: AS; // Vai ficar no AS
-
-    background-color: #252A48;
-
+  grid-area: AS; // Vai ficar no AS
+  color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors.secundary};
 `;
