@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 // Grid layout com 2 linhas e 2 colunas
-// A primeira coluna (menu) ocupa 25px, a segunda (conteudo)
+// A primeira coluna (menu) ocupa 250px, a segunda (conteudo)
 // ocupa tudo
 export const Container = styled.div`
   display: grid;
