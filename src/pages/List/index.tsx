@@ -7,12 +7,14 @@ import SelectInput from "../../components/SelectInput";
 import * as S from "./styles";
 
 const List: React.FC = () => {
-
   let { type } = useParams();
 
-  const Title = useMemo(() => {
-    return type === "entry-balance" ? "Entradas" : "Saídas";
+  const EntryStyle = useMemo(() => {
+    return type === "entry-balance"
+      ? { title: "Entradas", lineColor: "#F7913b" }
+      : { title: "Saídas", lineColor: "#E44C4E" };
   }, [type]);
+
 
   const months = [
     {
@@ -46,7 +48,7 @@ const List: React.FC = () => {
 
   return (
     <S.Container>
-      <ContentHeader title={Title} lineColor="#F7931B">
+      <ContentHeader title={EntryStyle.title} lineColor={EntryStyle.lineColor}>
         <SelectInput options={months} />
         <SelectInput options={years} />
       </ContentHeader>
