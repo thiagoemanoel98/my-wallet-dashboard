@@ -1,13 +1,26 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import ContentHeader from "../../components/ContentHeader";
 import HistoryFinanceCardProps from "../../components/HistoryFinanceCard";
 import SelectInput from "../../components/SelectInput";
 
+import gains from "../../repositories/gains";
+import expenses from "../../repositories/expenses";
+
 import * as S from "./styles";
+
+interface IData {
+  id: string;
+  decription: string;
+  amountFormatted: string;
+  frequency: string;
+  dataFormatted: string;
+  tagColor: string;
+}
 
 const List: React.FC = () => {
   let { type } = useParams();
+  const [data, setData] = useState<IData[]>([]);
 
   const EntryStyle = useMemo(() => {
     return type === "entry-balance"
@@ -15,6 +28,9 @@ const List: React.FC = () => {
       : { title: "Saídas", lineColor: "#E44C4E" };
   }, [type]);
 
+  const ListData = useMemo(() => {
+    return type === "entry-balance" ? gains : expenses;
+  }, [type]);
 
   const months = [
     {
@@ -46,6 +62,21 @@ const List: React.FC = () => {
     },
   ];
 
+  useEffect(() => {
+    const response = ListData.map((item) => {
+      return {
+        id: String(Math.random() * data.length),
+        decription: item.description,
+        amountFormatted: item.amount,
+        frequency: item.frequency,
+        dataFormatted: item.date,
+        tagColor: item.frequency === "recorrente" ? "#4E41F0" : "#E44C4E",
+      };
+    });
+
+    setData(response);
+  }, []);
+
   return (
     <S.Container>
       <ContentHeader title={EntryStyle.title} lineColor={EntryStyle.lineColor}>
@@ -63,18 +94,15 @@ const List: React.FC = () => {
       </S.Filters>
 
       <S.Content>
-        <HistoryFinanceCardProps
-          tagColor="#E44C4E"
-          title="Conta de luz"
-          subtitle="27/07/2022"
-          amount="R$ 130,00"
-        />
-        <HistoryFinanceCardProps
-          tagColor="#E44C4E"
-          title="Conta de Gás"
-          subtitle="27/07/2022"
-          amount="R$ 100,00"
-        />
+        {data.map((item) => (
+          <HistoryFinanceCardProps
+            key={item.id}
+            tagColor={item.tagColor}
+            title={item.decription}
+            subtitle={item.dataFormatted}
+            amount="R$ 130,00"
+          />
+        ))}
       </S.Content>
     </S.Container>
   );
