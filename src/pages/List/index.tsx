@@ -35,7 +35,7 @@ const List: React.FC = () => {
 
   const EntryStyle = useMemo(() => {
     return type === "entry-balance"
-      ? { title: "Entradas", lineColor: "#F7913b" }
+      ? { title: "Entradas", lineColor: "#4E41F0" }
       : { title: "Saídas", lineColor: "#E44C4E" };
   }, [type]);
 
