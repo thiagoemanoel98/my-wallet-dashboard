@@ -24,18 +24,14 @@ interface IData {
 
 const List: React.FC = () => {
   const [data, setData] = useState<IData[]>([]);
-  const [monthSelected, setMonthSelected] = useState<string>(
-    String(new Date().getMonth() + 1)
-  );
-  const [yearSelected, setYearSelected] = useState<string>(
-    String(new Date().getFullYear())
-  );
+  const [monthSelected, setMonthSelected] = useState(new Date().getMonth() + 1);
+  const [yearSelected, setYearSelected] = useState(new Date().getFullYear());
   const [frequencyFilterSelected, setFrequencyFilterSelected] = useState([
     "recorrente",
     "eventual",
   ]);
 
-  let { type } = useParams(); 
+  let { type } = useParams();
 
   const EntryStyle = useMemo(() => {
     return type === "entry-balance"
@@ -84,7 +80,9 @@ const List: React.FC = () => {
     );
 
     if (alreadySelected >= 0) {
-      const filtered = frequencyFilterSelected.filter((item) => item !== frequency);
+      const filtered = frequencyFilterSelected.filter(
+        (item) => item !== frequency
+      );
       setFrequencyFilterSelected(filtered);
     } else {
       console.log("Foi Selecionado agr");
@@ -92,11 +90,29 @@ const List: React.FC = () => {
     }
   };
 
+  const handleMonthSelected = (month: string) => {
+    try {
+      const parseMonth = Number(month);
+      setMonthSelected(parseMonth);
+    } catch (error) {
+      throw new Error("Mês inválido");
+    }
+  };
+
+  const handleYearSelected = (year: string) => {
+    try {
+      const parseYear = Number(year);
+      setYearSelected(parseYear);
+    } catch (error) {
+      throw new Error("Mês inválido");
+    }
+  };
+
   useEffect(() => {
     const filteredData = ListData.filter((item) => {
       const date = new Date(item.date);
-      const month = String(date.getMonth() + 1);
-      const year = String(date.getFullYear());
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
 
       return (
         month === monthSelected &&
@@ -117,19 +133,25 @@ const List: React.FC = () => {
     });
 
     setData(formattedData);
-  }, [ListData, monthSelected, yearSelected, data.length, frequencyFilterSelected]);
+  }, [
+    ListData,
+    monthSelected,
+    yearSelected,
+    data.length,
+    frequencyFilterSelected,
+  ]);
 
   return (
     <S.Container>
       <ContentHeader title={EntryStyle.title} lineColor={EntryStyle.lineColor}>
         <SelectInput
           options={months}
-          onChange={(e) => setMonthSelected(e.target.value)}
+          onChange={(e) => handleMonthSelected(e.target.value)}
           defaultValue={monthSelected}
         />
         <SelectInput
           options={years}
-          onChange={(e) => setYearSelected(e.target.value)}
+          onChange={(e) => handleYearSelected(e.target.value)}
           defaultValue={yearSelected}
         />
       </ContentHeader>
