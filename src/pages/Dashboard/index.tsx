@@ -7,6 +7,7 @@ import gains from "../../repositories/gains";
 import expenses from "../../repositories/expenses";
 
 import * as S from "./styles";
+import WalletBox from "../../components/WalletBox";
 
 const Dashboard: React.FC = () => {
   const [monthSelected, setMonthSelected] = useState(new Date().getMonth() + 1);
@@ -42,7 +43,7 @@ const Dashboard: React.FC = () => {
       };
     });
   }, []);
-  
+
   const handleMonthSelected = (month: string) => {
     try {
       const parseMonth = Number(month);
@@ -64,7 +65,7 @@ const Dashboard: React.FC = () => {
   return (
     <S.Container>
       <ContentHeader title="Dashboard" lineColor="#F7931B">
-      <SelectInput
+        <SelectInput
           options={months}
           onChange={(e) => handleMonthSelected(e.target.value)}
           defaultValue={monthSelected}
@@ -75,6 +76,30 @@ const Dashboard: React.FC = () => {
           defaultValue={yearSelected}
         />
       </ContentHeader>
+
+      <S.Content>
+        <WalletBox
+          title="Saldo"
+          amount={10000.0}
+          footerLabel="Atualizado com base nas entradas e saídas"
+          icon="dolar"
+          color="#4E41F0"
+        />
+        <WalletBox
+          title="Entradas"
+          amount={7000.0}
+          footerLabel="Atualizado com base nas entradas e saídas"
+          icon="arrowUp"
+          color="#F7931B"
+        />
+        <WalletBox
+          title="Saídas"
+          amount={3000.0}
+          footerLabel="Atualizado com base nas entradas e saídas"
+          icon="arrowDown"
+          color="#E44C4E"
+        />
+      </S.Content>
     </S.Container>
   );
 };
