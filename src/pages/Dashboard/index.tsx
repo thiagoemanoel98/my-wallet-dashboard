@@ -106,7 +106,7 @@ const Dashboard: React.FC = () => {
     } else if (totalBalance === 0) {
       return {
         title: "Ufa!",
-        description: "Neste mês, você gastou examtamente o que ganhou.",
+        description: "Neste mês, você gastou exatamente o que ganhou.",
         footerText: "Tenha cuidado. No próximo mês tente poupar o seu dinheiro",
         icon: grinningImg,
       };
