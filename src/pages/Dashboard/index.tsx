@@ -14,6 +14,7 @@ import * as S from "./styles";
 import WalletBox from "../../components/WalletBox";
 import MessageBox from "../../components/MessageBox";
 import PieChartBox from "../../components/PieChart";
+import HistoryBox from "../../components/HistoryBox";
 
 const Dashboard: React.FC = () => {
   const [monthSelected, setMonthSelected] = useState(new Date().getMonth() + 1);
@@ -144,6 +145,48 @@ const Dashboard: React.FC = () => {
     return data;
   }, [totalGains, totalExpenses]);
 
+  const historyData = useMemo(() => {
+    return ListOfMonths.map((_, month) => {
+      let amountEntry = 0;
+
+      gains.forEach((gain) => {
+        const date = new Date(gain.date);
+        const gainMonth = date.getMonth();
+        const gainYear = date.getFullYear();
+
+        if (gainMonth === month && gainYear === yearSelected) {
+          try {
+            amountEntry += Number(gain.amount);
+          } catch {
+            throw new Error("Amount entry is invalid");
+          }
+        }
+      });
+
+      let amountOutput = 0;
+
+      expenses.forEach((expense) => {
+        const date = new Date(expense.date);
+        const expenseMonth = date.getMonth();
+        const expenseYear = date.getFullYear();
+
+        if (expenseMonth === month && expenseYear === yearSelected) {
+          try {
+            amountOutput += Number(expense.amount);
+          } catch {
+            throw new Error("Expense entry is invalid");
+          }
+        }
+      });
+      return {
+        monthNumber: month,
+        month: ListOfMonths[month].substring(0, 3),
+        amountEntry,
+        amountOutput,
+      };
+    });
+  }, [yearSelected]);
+
   const handleMonthSelected = (month: string) => {
     try {
       const parseMonth = Number(month);
@@ -206,6 +249,12 @@ const Dashboard: React.FC = () => {
           footerText={message.footerText}
         />
         <PieChartBox data={relationExpensesGains} />
+
+        <HistoryBox
+          data={historyData}
+          lineColorAmountEntry={"#F7931B"}
+          lineColorAmountOutput={"#e44c43"}
+        />
       </S.Content>
     </S.Container>
   );
