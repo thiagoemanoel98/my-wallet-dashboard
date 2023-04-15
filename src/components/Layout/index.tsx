@@ -10,14 +10,12 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Layout: React.FC<Props> = ({ children }) => {
-  return (
-    <S.Container>
-      <MainHeader />
-      <Aside />
-      <Content>{children}</Content>
-    </S.Container>
-  );
-};
+const Layout: React.FC<Props> = ({ children }) => (
+  <S.Container>
+    <MainHeader />
+    <Aside />
+    <Content>{children}</Content>
+  </S.Container>
+);
 
 export default Layout;

@@ -6,12 +6,8 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Content: React.FC<Props> = ({children}) => {
-  return (
-    <S.Container>
-      {children}
-    </S.Container>
-  );
-};
+const Content: React.FC<Props> = ({ children }) => (
+  <S.Container>{children}</S.Container>
+);
 
 export default Content;

@@ -15,8 +15,7 @@ interface IBarChartProps {
   }[];
 }
 
-const BarChartBox: React.FC<IBarChartProps> = ({ title, data }) => {
-  return (
+const BarChartBox: React.FC<IBarChartProps> = ({ title, data }) =>  (
     <S.Container>
       <S.SideLeft>
         <h2>{title}</h2>
@@ -52,6 +51,5 @@ const BarChartBox: React.FC<IBarChartProps> = ({ title, data }) => {
       </S.SideRight>
     </S.Container>
   );
-};
-
+  
 export default BarChartBox;

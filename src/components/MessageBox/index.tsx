@@ -14,21 +14,19 @@ const MessageBox: React.FC<IMessageBoxProps> = ({
   description,
   footerText,
   icon,
-}) => {
-  return (
-    <S.Container>
-      <header>
-        <h1>
-          {title} <img src={icon} alt={title} />
-        </h1>
-        <p>{description}</p>
-      </header>
+}) => (
+  <S.Container>
+    <header>
+      <h1>
+        {title} <img src={icon} alt={title} />
+      </h1>
+      <p>{description}</p>
+    </header>
 
-      <footer>
-        <span>{footerText}</span>
-      </footer>
-    </S.Container>
-  );
-};
+    <footer>
+      <span>{footerText}</span>
+    </footer>
+  </S.Container>
+);
 
 export default MessageBox;
