@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import ContentHeader from "../../components/ContentHeader";
 import SelectInput from "../../components/SelectInput";
 import ListOfMonths from "../../utils/months";
@@ -7,7 +7,6 @@ import happyImg from "../../assets/happy.svg";
 import sadImg from "../../assets/sad.svg";
 import grinningImg from "../../assets/grinning.svg";
 import opsEmoji from "../../assets/ops.svg";
-
 
 import gains from "../../repositories/gains";
 import expenses from "../../repositories/expenses";
@@ -292,23 +291,23 @@ const Dashboard: React.FC = () => {
     ];
   }, [monthSelected, yearSelected]);
 
-  const handleMonthSelected = (month: string) => {
+  const handleMonthSelected = useCallback((month: string) => {
     try {
       const parseMonth = Number(month);
       setMonthSelected(parseMonth);
     } catch (error) {
       throw new Error("Mês inválido");
     }
-  };
+  }, []);
 
-  const handleYearSelected = (year: string) => {
+  const handleYearSelected = useCallback((year: string) => {
     try {
       const parseYear = Number(year);
       setYearSelected(parseYear);
     } catch (error) {
       throw new Error("Mês inválido");
     }
-  };
+  }, []);
 
   return (
     <S.Container>

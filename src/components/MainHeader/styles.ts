@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   grid-area: MH; // Vai ficar no MH
-  background-color: ${(props) => props.theme.colors.secundary};
+  background-color: ${(props) => props.theme.colors.secondary};
   display: flex;
   justify-content: space-between;
   align-items: center;

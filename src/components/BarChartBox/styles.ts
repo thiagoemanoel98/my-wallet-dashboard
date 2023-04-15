@@ -38,7 +38,7 @@ export const LegendContainer = styled.ul`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.colors.secundary};
+    background-color: ${(props) => props.theme.colors.secondary};
     border-radius: 10px;
   }
 
