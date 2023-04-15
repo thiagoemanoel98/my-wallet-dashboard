@@ -6,6 +6,8 @@ import ListOfMonths from "../../utils/months";
 import happyImg from "../../assets/happy.svg";
 import sadImg from "../../assets/sad.svg";
 import grinningImg from "../../assets/grinning.svg";
+import opsEmoji from "../../assets/ops.svg";
+
 
 import gains from "../../repositories/gains";
 import expenses from "../../repositories/expenses";
@@ -105,6 +107,14 @@ const Dashboard: React.FC = () => {
           "Verifique seus gastos e tente cortar algumas coisas desnecessárias",
         icon: sadImg,
       };
+    } else if (totalGains === 0 && totalExpenses === 0) {
+      return {
+        title: "Ops!",
+        description: "Neste mês, não há registros de entradas ou saídas",
+        footerText:
+          "Parece que você não fez nenhum registro no mês e ano selecionado",
+        icon: opsEmoji,
+      };
     } else if (totalBalance === 0) {
       return {
         title: "Ufa!",
@@ -120,25 +130,25 @@ const Dashboard: React.FC = () => {
         icon: happyImg,
       };
     }
-  }, [totalBalance]);
+  }, [totalBalance, totalExpenses, totalGains]);
 
   const relationExpensesGains = useMemo(() => {
     const total = totalGains + totalExpenses;
 
-    const percentGains = (totalGains / total) * 100;
-    const percentExpenses = (totalExpenses / total) * 100;
+    const percentGains = Number(((totalGains / total) * 100).toFixed(1));
+    const percentExpenses = Number(((totalExpenses / total) * 100).toFixed(1));
 
     const data = [
       {
         name: "Entradas",
         value: totalGains,
-        percent: Number(percentGains.toFixed(1)),
+        percent: percentGains ? percentGains : 0,
         color: "#E44C4E",
       },
       {
         name: "Saídas",
         value: totalExpenses,
-        percent: Number(percentExpenses.toFixed(1)),
+        percent: percentExpenses ? percentExpenses : 0,
         color: "#F7931B",
       },
     ];
@@ -218,20 +228,22 @@ const Dashboard: React.FC = () => {
       });
 
     const total = amountEventual + amountRecurrent;
-    const percentEventual = Number((amountEventual / total) * 100).toFixed(2);
-    const percentRecurrent = Number((amountRecurrent / total) * 100).toFixed(2);
+    const percentEventual = Number(((amountEventual / total) * 100).toFixed(2));
+    const percentRecurrent = Number(
+      ((amountRecurrent / total) * 100).toFixed(2)
+    );
 
     return [
       {
         name: "Recorrentes",
         amount: amountRecurrent,
-        percent: percentRecurrent,
+        percent: percentRecurrent ? percentEventual : 0,
         color: "#F7931B",
       },
       {
         name: "Eventuais",
         amount: amountEventual,
-        percent: percentEventual,
+        percent: percentEventual ? percentEventual : 0,
         color: "#E44C4E",
       },
     ];
@@ -259,20 +271,22 @@ const Dashboard: React.FC = () => {
       });
 
     const total = amountEventual + amountRecurrent;
-    const percentEventual = Number((amountEventual / total) * 100).toFixed(2);
-    const percentRecurrent = Number((amountRecurrent / total) * 100).toFixed(2);
+    const percentEventual = Number(((amountEventual / total) * 100).toFixed(2));
+    const percentRecurrent = Number(
+      ((amountRecurrent / total) * 100).toFixed(2)
+    );
 
     return [
       {
         name: "Recorrentes",
         amount: amountRecurrent,
-        percent: percentRecurrent,
+        percent: percentRecurrent ? percentEventual : 0,
         color: "#F7931B",
       },
       {
         name: "Eventuais",
         amount: amountEventual,
-        percent: percentEventual,
+        percent: percentEventual ? percentEventual : 0,
         color: "#E44C4E",
       },
     ];
@@ -347,9 +361,14 @@ const Dashboard: React.FC = () => {
           lineColorAmountOutput={"#e44c43"}
         />
 
-        <BarChartBox  title={"Saídas"} data={relationExpensevesRecurrentVersusEventual}  />
-        <BarChartBox  title={"Entradas"} data={relationGainsRecurrentVersusEventual}  />
-
+        <BarChartBox
+          title={"Saídas"}
+          data={relationExpensevesRecurrentVersusEventual}
+        />
+        <BarChartBox
+          title={"Entradas"}
+          data={relationGainsRecurrentVersusEventual}
+        />
       </S.Content>
     </S.Container>
   );
