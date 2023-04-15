@@ -237,7 +237,7 @@ const Dashboard: React.FC = () => {
       {
         name: "Recorrentes",
         amount: amountRecurrent,
-        percent: percentRecurrent ? percentEventual : 0,
+        percent: percentRecurrent ? percentRecurrent : 0,
         color: "#F7931B",
       },
       {
@@ -280,7 +280,7 @@ const Dashboard: React.FC = () => {
       {
         name: "Recorrentes",
         amount: amountRecurrent,
-        percent: percentRecurrent ? percentEventual : 0,
+        percent: percentRecurrent ? percentRecurrent : 0,
         color: "#F7931B",
       },
       {
