@@ -30,15 +30,22 @@ interface Props {
 const ThemeContext = createContext<IThemeContext>({} as IThemeContext);
 
 const ThemeProvider: React.FC<Props> = ({ children }) => {
-  const [theme, setTheme] = useState<ITheme>(dark);
+  const [theme, setTheme] = useState<ITheme>(() => {
+    const themeSaved = localStorage.getItem("@MyWallet:theme");
+    if (themeSaved) {
+      return JSON.parse(themeSaved);
+    } else {
+      return dark;
+    }
+  });
 
   const toggleTheme = () => {
-    console.log(theme.title)
-
     if (theme.title === "dark") {
       setTheme(light);
+      localStorage.setItem("@MyWallet:theme", JSON.stringify(light));
     } else {
       setTheme(dark);
+      localStorage.setItem("@MyWallet:theme", JSON.stringify(dark));
     }
   };
 
