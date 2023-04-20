@@ -1,4 +1,6 @@
-# My-Wallet :bar_chart:	:chart_with_downwards_trend:	
+# My-Wallet [![My Skills](https://skillicons.dev/icons?i=ts,react)](https://skillicons.dev)
+
+
 
 O projeto consiste na criação de um Dashboard para acompanhamento de gastos utilizando React JS e TypeScript. O objetivo é fornecer aos usuários uma interface intuitiva e clara para visualizar e analisar seus gastos. O uso do TypeScript ajuda a detectar erros de código em tempo de compilação, aumentando a qualidade e segurança do projeto.
 <br/>
