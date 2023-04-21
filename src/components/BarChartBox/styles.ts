@@ -14,6 +14,14 @@ export const Container = styled.div`
   border-radius: 7px;
 
   display: flex;
+
+  @media (max-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const SideLeft = styled.aside`
@@ -46,6 +54,11 @@ export const LegendContainer = styled.ul`
     background-color: ${(props) => props.theme.colors.tertiary};
     border-radius: 10px;
   }
+
+  @media (max-width: 1200px) {
+    display: flex;
+    height: auto;
+  }
 `;
 
 export const Legend = styled.li<ILegendProps>`
@@ -71,12 +84,24 @@ export const Legend = styled.li<ILegendProps>`
   > span {
     margin-left: 12px;
   }
+
+  @media (max-width: 1200px) {
+    padding-left: 12px;
+
+    > div {
+      width: 30px;
+      height: 30px;
+
+      font-size: 10px;
+      line-height: 30px;
+    }
+  }
 `;
 
 export const SideRight = styled.main`
   flex: 1;
   min-height: 150px;
-  width: 500px;
+  width: 320px;
 
   display: flex;
   justify-content: center;
