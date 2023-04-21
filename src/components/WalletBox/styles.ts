@@ -10,11 +10,11 @@ export const Container = styled.div<IContainerProps>`
 
   margin: 10px 0;
   background-color: ${(props) => props.color};
-  color: ${props => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.white};
 
   border-radius: 7px;
   padding: 10px 20px;
-  
+
   position: relative;
   overflow: hidden;
 
@@ -24,7 +24,7 @@ export const Container = styled.div<IContainerProps>`
     position: absolute;
     top: -10px;
     right: -30px;
-    opacity: .3;
+    opacity: 0.3;
   }
 
   > span {
@@ -38,15 +38,39 @@ export const Container = styled.div<IContainerProps>`
     bottom: 10px;
   }
 
-  @media(max-width: 770px){
+  @media (max-width: 770px) {
     > span {
       font-size: 14px;
     }
 
-    >h1 {
+    > h1 {
       word-wrap: break-word;
       font-size: 20px;
+      > strong {
+        display: inline-block;
+        width: 100%;
+      }
     }
   }
 
+  @media (max-width: 420px) {
+    width: 100%;
+
+    > h1 {
+      display: flex;
+      flex-direction: row;
+
+      > strong {
+        font-size: 22px;
+
+        width: auto;
+      }
+
+      > strong::after {
+        display: inline-block;
+        content: "";
+        width: 1px;
+      }
+    }
+  }
 `;
