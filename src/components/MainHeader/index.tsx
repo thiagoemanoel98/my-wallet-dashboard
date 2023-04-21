@@ -24,7 +24,7 @@ const MainHeader: React.FC = () => {
 
   return (
     <S.Container>
-      <Toggle
+      <S.Toggle
         labelLeft="Light"
         labelRight="Dark"
         checked={darkTheme}
